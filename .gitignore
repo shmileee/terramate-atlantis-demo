@@ -1,0 +1,8 @@
+.terraform/
+*.tfstate
+*.tfstate.*
+atlantis.yaml
+atlantis/.env
+atlantis/.env.tunnel
+atlantis/github-app.pem
+atlantis/.e2e-comments/

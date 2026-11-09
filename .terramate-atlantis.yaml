@@ -1,0 +1,2 @@
+output: atlantis.yaml
+apply_requirements: [mergeable]

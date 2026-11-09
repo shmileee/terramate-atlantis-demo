@@ -1,0 +1,20 @@
+# Server-side repo config. atlantis.yaml is not committed: the hook writes it
+# into the pull request's clone before Atlantis reads it. The overrides let
+# the generated file pick a workflow and apply requirements per project; the
+# workflows themselves are defined here, on the server.
+repos:
+  - id: /.*/
+    pre_workflow_hooks:
+      - run: terramate-atlantis-config generate --output atlantis.yaml
+        description: terramate-atlantis-config
+    allowed_overrides:
+      - workflow
+      - apply_requirements
+
+workflows:
+  production:
+    plan:
+      steps:
+        - init
+        - run: terraform validate -no-color
+        - plan
