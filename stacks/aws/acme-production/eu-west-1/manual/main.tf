@@ -1,3 +1,3 @@
 resource "terraform_data" "this" {
-  input = "${local.account_name}-${local.region}-manual"
+  input = "${local.account_name}-${local.region}-manual-v2"
 }
