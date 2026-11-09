@@ -1,5 +1,4 @@
 stack {
-  name        = "network"
-  description = "network"
-  id          = "5e0f2845-b084-4c66-918b-492629282310"
+  name = "network"
+  id   = "5e0f2845-b084-4c66-918b-492629282310"
 }

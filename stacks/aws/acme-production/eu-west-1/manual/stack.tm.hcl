@@ -1,7 +1,6 @@
 stack {
-  name        = "manual"
-  description = "manual"
-  id          = "ac3dec89-c3c8-4244-b244-b41c1a8acc73"
+  name = "manual"
+  id   = "ac3dec89-c3c8-4244-b244-b41c1a8acc73"
 }
 
 globals {
