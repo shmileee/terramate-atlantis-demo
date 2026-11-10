@@ -6,9 +6,12 @@ A small [Terramate](https://terramate.io) repository planned by
 [terramate-atlantis-config](https://github.com/devops-roast/terramate-atlantis-config)
 generates it from the stacks in every pull request.
 
-- Blog post: [Generating Atlantis config from Terramate stacks](https://oponomarov.com/blog/posts/generating-atlantis-config-from-terramate-stacks/)
-- Next step, with Terramate's generated code left out of git as well:
-  [terramate-atlantis-autoplan](https://github.com/shmileee/terramate-atlantis-autoplan)
+This is the example repository for
+[Generating Atlantis config from Terramate stacks](https://oponomarov.com/blog/posts/generating-atlantis-config-from-terramate-stacks/),
+which walks through everything below. The follow-up post,
+[Planning Terramate stacks in Atlantis without generated code](https://oponomarov.com/blog/posts/planning-terramate-stacks-in-atlantis-without-generated-code/),
+uses [terramate-atlantis-autoplan](https://github.com/shmileee/terramate-atlantis-autoplan),
+which leaves Terramate's generated code out of Git as well.
 
 ## What to look at
 
@@ -19,10 +22,22 @@ generates it from the stacks in every pull request.
 | [`stacks/aws/acme-production/eu-west-1/manual`](stacks/aws/acme-production/eu-west-1/manual/stack.tm.hcl) | a stack planned only on request |
 | [`.terramate-atlantis.yaml`](.terramate-atlantis.yaml) | defaults for every project |
 | [`atlantis/repos.yaml`](atlantis/repos.yaml) | the hook that generates `atlantis.yaml`, and the `production` workflow |
-| [Pull requests](https://github.com/shmileee/terramate-atlantis-demo/pulls) | one per example, with what to look for in the description |
+| [`atlantis/docker-compose.yaml`](atlantis/docker-compose.yaml) | the Atlantis server: a failing hook stops the run, and plans use the `merge` checkout strategy |
 
 The stacks only hold `terraform_data` resources, so they plan without cloud
 credentials. Tool versions are pinned in [`mise.toml`](mise.toml).
+
+## The pull requests
+
+Each pull request isolates one behavior, and its description says what to
+look for. Their conversations are locked, so Atlantis' comments stay as they
+were; to try a change of your own, fork the repository and run it yourself.
+
+| Pull request | Changes | Atlantis plans |
+| --- | --- | --- |
+| [#1](https://github.com/shmileee/terramate-atlantis-demo/pull/1) | adds a development stack, `new-stack` | the new stack |
+| [#2](https://github.com/shmileee/terramate-atlantis-demo/pull/2) | `network` in both accounts | both, production with `terraform validate` first |
+| [#3](https://github.com/shmileee/terramate-atlantis-demo/pull/3) | `skipped`, `manual` and development `app` | `app`; `manual` only after `atlantis plan -p` |
 
 ## Running it yourself
 
